@@ -14,10 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     phone: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: {
-        is: /^[0-9]{10,11}$/  // This expects exactly 10 digits, no spaces or leading zero
-      }
+        is: {
+          args: /^\+?[1-9][0-9]{7,14}$/,
+          msg: 'Phone number must be in valid format (10-15 digits, optional plus sign, no spaces or hyphens)',
+        },
+      },
     },
     password: {
       type: DataTypes.STRING,
